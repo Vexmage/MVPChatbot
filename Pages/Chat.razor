@@ -1,0 +1,24 @@
+﻿@page "/chat"
+@inject OpenAIChatService ChatService
+
+<h3>MVP Chatbot</h3>
+
+<div>
+    <textarea @bind="userInput" placeholder="Ask something..." rows="4" cols="60"></textarea>
+</div>
+<div>
+    <button @onclick="SendMessage">Send</button>
+</div>
+<div>
+    <p><strong>AI:</strong> @botResponse</p>
+</div>
+
+@code {
+    private string userInput = "";
+    private string botResponse = "";
+
+    private async Task SendMessage()
+    {
+        botResponse = await ChatService.SendMessageAsync(userInput);
+    }
+}
